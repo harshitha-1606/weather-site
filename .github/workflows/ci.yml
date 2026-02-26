@@ -1,0 +1,19 @@
+name: Weather CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build step
+        run: echo "Building Weather Website..."
+
+      - name: Test step
+        run: echo "Running Tests..."
