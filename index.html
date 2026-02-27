@@ -1,49 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Weather Website</title>
+    <meta charset="UTF-8">
+    <title>Live Weather App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-<style>
-body{
-    font-family: Arial;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color:white;
-    text-align:center;
-    padding-top:100px;
-}
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
 
-.box{
-    background:white;
-    color:black;
-    width:80%;
-    margin:auto;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0px 5px 20px rgba(0,0,0,0.3);
-}
+        input {
+            padding: 10px;
+            width: 70%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
 
-h1{
-    color:#2a5298;
-}
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
 
-.pipeline{
-    margin-top:20px;
-    font-weight:bold;
-    color:#444;
-}
-</style>
+        .weather-result {
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="box">
-<h1>🌤 Weather Website CI/CD Demo</h1>
-<p>This site is automatically deployed using GitHub Actions & GitHub Pages.</p>
+<div class="container">
+    <h2>🌦 Live Weather App</h2>
 
-<div class="pipeline">
-Code ➜ Build ➜ Test ➜ Deploy ➜ Production
+    <input type="text" id="city" placeholder="Enter city name">
+    <button onclick="getWeather()">Search</button>
+
+    <div class="weather-result" id="result"></div>
 </div>
-</div>
+
+<script>
+    async function getWeather() {
+        const city = document.getElementById("city").value;
+        const apiKey = "YOUR_API_KEY_HERE";
+
+        const url = https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.cod === "404") {
+                document.getElementById("result").innerHTML =
+                    "<p class='error'>City not found!</p>";
+                return;
+            }
+
+            document.getElementById("result").innerHTML = `
+                <h3>${data.name}</h3>
+                <p>🌡 Temperature: ${data.main.temp} °C</p>
+                <p>☁ Condition: ${data.weather[0].description}</p>
+                <p>💧 Humidity: ${data.main.humidity}%</p>
+                <p>🌬 Wind Speed: ${data.wind.speed} m/s</p>
+            `;
+
+        } catch (error) {
+            document.getElementById("result").innerHTML =
+                "<p class='error'>Something went wrong!</p>";
+        }
+    }
+</script>
 
 </body>
 </html>
