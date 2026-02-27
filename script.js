@@ -1,50 +1,45 @@
-const apiKey = "YOUR_API_KEY_HERE";
+const apiKey = "YOUR_API_KEY";
 
 async function getWeather(city) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const errorMsg = document.getElementById("errorMsg");
+    const weatherBox = document.getElementById("weatherBox");
 
-    const response = await fetch(url);
-    const data = await response.json();
+    errorMsg.innerText = "";
+    weatherBox.classList.add("hidden");
 
-    if (data.cod !== 200) {
-        alert("City not found!");
-        return;
+    try {
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        );
+
+        const data = await response.json();
+
+        if (data.cod != 200) {
+            errorMsg.innerText = data.message;
+            return;
+        }
+
+        document.getElementById("cityName").innerText = data.name;
+        document.getElementById("temperature").innerText = data.main.temp + "°C";
+        document.getElementById("condition").innerText = data.weather[0].main;
+        document.getElementById("extra").innerText =
+            "Humidity: " + data.main.humidity + "% | Wind: " + data.wind.speed + " m/s";
+
+        const iconCode = data.weather[0].icon;
+        document.getElementById("weatherIcon").src =
+            `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+        weatherBox.classList.remove("hidden");
+
+    } catch (error) {
+        errorMsg.innerText = "Something went wrong!";
     }
-
-    document.getElementById("weatherBox").classList.remove("hidden");
-
-    document.getElementById("cityName").innerText = data.name;
-    document.getElementById("temperature").innerText = data.main.temp + "°C";
-    document.getElementById("condition").innerText = data.weather[0].main;
-    document.getElementById("extra").innerText =
-        "Humidity: " + data.main.humidity + "% | Wind: " + data.wind.speed + " m/s";
-
-    const iconCode = data.weather[0].icon;
-    document.getElementById("weatherIcon").src =
-        `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
-    changeBackground(data.weather[0].main);
 }
 
 function searchCity() {
-    const city = document.getElementById("city").value;
+    const city = document.getElementById("city").value.trim();
     if (city) {
         getWeather(city);
-    }
-}
-
-function changeBackground(condition) {
-    if (condition.includes("Cloud")) {
-        document.body.style.background = "linear-gradient(to right, #757F9A, #D7DDE8)";
-    }
-    else if (condition.includes("Rain")) {
-        document.body.style.background = "linear-gradient(to right, #000046, #1CB5E0)";
-    }
-    else if (condition.includes("Clear")) {
-        document.body.style.background = "linear-gradient(to right, #f7971e, #ffd200)";
-    }
-    else {
-        document.body.style.background = "linear-gradient(to right, #4facfe, #00f2fe)";
     }
 }
 
