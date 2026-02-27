@@ -1,43 +1,50 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background 0.8s ease;
+    height: 100vh;
 }
 
 .container {
-    backdrop-filter: blur(15px);
-    background: rgba(255,255,255,0.2);
+    background: white;
     padding: 30px;
-    border-radius: 20px;
-    width: 320px;
+    border-radius: 15px;
+    width: 350px;
     text-align: center;
-    color: white;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 input {
     padding: 10px;
-    width: 70%;
-    border-radius: 10px;
-    border: none;
+    flex: 1;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 button {
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: none;
-    background: white;
+    background: #007bff;
+    color: white;
     cursor: pointer;
-    margin-top: 10px;
+}
+
+button:hover {
+    background: #0056b3;
 }
 
 .weather-box {
     margin-top: 20px;
-    animation: fadeIn 1s ease;
 }
 
 .weather-box img {
@@ -48,7 +55,7 @@ button {
     display: none;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
+.error {
+    color: red;
+    margin-top: 10px;
 }
