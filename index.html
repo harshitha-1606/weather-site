@@ -4,95 +4,22 @@
     <meta charset="UTF-8">
     <title>Live Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 350px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        input {
-            padding: 10px;
-            width: 70%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        .weather-result {
-            margin-top: 20px;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
     <h2>🌦 Live Weather App</h2>
 
     <input type="text" id="city" placeholder="Enter city name">
-    <button onclick="getWeather()">Search</button>
+    <button onclick="searchCity()">Search</button>
+    <button onclick="getCurrentLocation()">📍 Use My Location</button>
 
     <div class="weather-result" id="result"></div>
+    <div class="forecast" id="forecast"></div>
 </div>
 
-<script>
-    async function getWeather() {
-        const city = document.getElementById("city").value;
-        const apiKey = "YOUR_API_KEY_HERE";
-
-        const url = https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric;
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.cod === "404") {
-                document.getElementById("result").innerHTML =
-                    "<p class='error'>City not found!</p>";
-                return;
-            }
-
-            document.getElementById("result").innerHTML = `
-                <h3>${data.name}</h3>
-                <p>🌡 Temperature: ${data.main.temp} °C</p>
-                <p>☁ Condition: ${data.weather[0].description}</p>
-                <p>💧 Humidity: ${data.main.humidity}%</p>
-                <p>🌬 Wind Speed: ${data.wind.speed} m/s</p>
-            `;
-
-        } catch (error) {
-            document.getElementById("result").innerHTML =
-                "<p class='error'>Something went wrong!</p>";
-        }
-    }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
