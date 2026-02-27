@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Modern Weather App</title>
+    <title>Live Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h2>🌦 Live Weather</h2>
+    <h2>🌦 Live Weather App</h2>
 
-    <input type="text" id="city" placeholder="Enter city name">
-    <button onclick="searchCity()">Search</button>
+    <div class="search-box">
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="searchCity()">Search</button>
+    </div>
 
     <div id="weatherBox" class="weather-box hidden">
         <h3 id="cityName"></h3>
@@ -20,6 +22,8 @@
         <p id="condition"></p>
         <p id="extra"></p>
     </div>
+
+    <p id="errorMsg" class="error"></p>
 </div>
 
 <script src="script.js"></script>
