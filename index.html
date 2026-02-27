@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Live Weather App</title>
+    <title>Modern Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h2>🌦 Live Weather App</h2>
+    <h2>🌦 Live Weather</h2>
 
     <input type="text" id="city" placeholder="Enter city name">
     <button onclick="searchCity()">Search</button>
-    <button onclick="getCurrentLocation()">📍 Use My Location</button>
 
-    <div class="weather-result" id="result"></div>
-    <div class="forecast" id="forecast"></div>
+    <div id="weatherBox" class="weather-box hidden">
+        <h3 id="cityName"></h3>
+        <img id="weatherIcon">
+        <h1 id="temperature"></h1>
+        <p id="condition"></p>
+        <p id="extra"></p>
+    </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
