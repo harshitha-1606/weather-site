@@ -1,0 +1,17 @@
+button {
+    margin: 5px;
+}
+
+.forecast {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.forecast-card {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
