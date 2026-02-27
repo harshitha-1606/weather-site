@@ -1,66 +1,54 @@
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    transition: background 0.8s ease;
 }
 
 .container {
-    background: white;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.2);
     padding: 30px;
-    border-radius: 15px;
-    width: 350px;
+    border-radius: 20px;
+    width: 320px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    transition: 0.3s ease;
-}
-
-.container:hover {
-    transform: translateY(-5px);
+    color: white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 input {
     padding: 10px;
     width: 70%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    border-radius: 10px;
+    border: none;
 }
 
 button {
     padding: 10px;
+    border-radius: 10px;
     border: none;
-    border-radius: 8px;
-    background: #007bff;
-    color: white;
+    background: white;
     cursor: pointer;
-    margin: 5px;
+    margin-top: 10px;
 }
 
-button:hover {
-    background: #0056b3;
-}
-
-.weather-result {
+.weather-box {
     margin-top: 20px;
+    animation: fadeIn 1s ease;
 }
 
-.error {
-    color: red;
+.weather-box img {
+    width: 80px;
 }
 
-.forecast {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.hidden {
+    display: none;
 }
 
-.forecast-card {
-    background: #f4f4f4;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
